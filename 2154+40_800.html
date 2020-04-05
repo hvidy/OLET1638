@@ -5,7 +5,7 @@
 
     <!-- Basic Page Needs–––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>Pulsar Timing Tutorial</title>
+    <title>Pulsar: 2154+40   Frequency: 800 MHz</title>
     <meta name="description" content="">
     <meta name="author" content="Daniel Hey">
     <meta name="author" content="Tim White">
@@ -69,7 +69,7 @@ window.onload = function() {
 	//Instantiate the chart and bind it to content html
   var graphDiv = document.getElementById('content');	
 
-  Plotly.d3.csv("data/0628-28_lowf.csv", function(err, ground){
+  Plotly.d3.csv("data/2154+40_lowf.csv", function(err, ground){
     function unpack(ground, key) {
       return ground.map(function(ground) { return ground[key]; });
     }

@@ -5,7 +5,7 @@
 
     <!-- Basic Page Needs–––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>Pulsar Timing Tutorial</title>
+    <title>Pulsar: 0628-28   Frequencies: 400, 600, 800 MHz</title>
     <meta name="description" content="">
     <meta name="author" content="Daniel Hey">
     <meta name="author" content="Tim White">
@@ -69,7 +69,7 @@ window.onload = function() {
 	//Instantiate the chart and bind it to content html
   var graphDiv = document.getElementById('content');	
 
-  Plotly.d3.csv("data/0628-28_lowf.csv", function(err, ground){
+  Plotly.d3.csv("data/0628-28_disp.csv", function(err, ground){
     function unpack(ground, key) {
       return ground.map(function(ground) { return ground[key]; });
     }
@@ -77,19 +77,28 @@ window.onload = function() {
   var trace1 = {
     type: "scattergl",
     mode: "lines",
-    name: 'Ground-based',
+    name: '400 MHz',
     x: unpack(ground, 'time'),
-    y: unpack(ground, 'intensity_400'),
-    marker: {
-    //color: 'rgb(217,95,2)',
-    opacity: 0.9,
-    size: 6,
-  }
+    y: unpack(ground, 'intensity_400')
   }
 
-  var data = [
-    trace1,
-  ];
+  var trace2 = {
+    type: "scattergl",
+    mode: "lines",
+    name: '600 MHz',
+    x: unpack(ground, 'time'),
+    y: unpack(ground, 'intensity_600')
+  }
+
+  var trace3 = {
+    type: "scattergl",
+    mode: "lines",
+    name: '800 MHz',
+    x: unpack(ground, 'time'),
+    y: unpack(ground, 'intensity_800')
+  }
+
+  var data = [trace1, trace2, trace3];
       
   var layout = {
     hovermode: "closest",
