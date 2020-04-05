@@ -5,7 +5,7 @@
 
     <!-- Basic Page Needs–––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
-    <title>Transiting Exoplanet Tutorial</title>
+    <title>Pulsar Timing Tutorial</title>
     <meta name="description" content="">
     <meta name="author" content="Daniel Hey">
     <meta name="author" content="Tim White">
@@ -69,14 +69,14 @@ window.onload = function() {
 	//Instantiate the chart and bind it to content html
   var graphDiv = document.getElementById('content');	
 
-  Plotly.d3.csv("data/0628-28_lowf.csv", function(err, ground){
+  Plotly.d3.csv("data/0628-28_disp.csv", function(err, ground){
     function unpack(ground, key) {
       return ground.map(function(ground) { return ground[key]; });
     }
 
   var trace1 = {
     type: "scattergl",
-    mode: "markers",
+    // mode: "markers",
     name: 'Ground-based',
     x: unpack(ground, 'time'),
     y: unpack(ground, 'intensity_400'),
