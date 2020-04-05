@@ -69,7 +69,7 @@ window.onload = function() {
 	//Instantiate the chart and bind it to content html
   var graphDiv = document.getElementById('content');	
 
-  Plotly.d3.csv("data/0628-28_disp.csv", function(err, ground){
+  Plotly.d3.csv("data/0531+21_disp.csv", function(err, ground){
     function unpack(ground, key) {
       return ground.map(function(ground) { return ground[key]; });
     }
