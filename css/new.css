@@ -1,0 +1,60 @@
+#resizable { width: 200px; height: 150px; padding: 0.5em; }
+#resizable h3 { text-align: center; margin: 0; }
+
+#content {
+  height: 85vh;
+  width: 100%
+}
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
+  text-align: center;
+}
+
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
+}
+
+.ruler, .ruler li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline-block;
+}
+/* IE6-7 Fix */
+.ruler, .ruler li {
+  *display: inline;
+}
+.ruler {
+  background: lightYellow;
+  box-shadow: 0 -1px 1em hsl(60, 60%, 84%) inset;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  color: #ccc;
+  margin: 0;
+  height: 3em;
+  padding-right: 1cm;
+  white-space: nowrap;
+}
+.ruler li {
+  padding-left: 1cm;
+  width: 2em;
+  margin: .64em -1em -.64em;
+  text-align: center;
+  position: relative;
+  text-shadow: 1px 1px hsl(60, 60%, 84%);
+}
+.ruler li:before {
+  content: '';
+  position: absolute;
+  border-left: 1px solid #ccc;
+  height: .64em;
+  top: -.64em;
+  right: 1em;
+}
