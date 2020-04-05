@@ -79,12 +79,7 @@ window.onload = function() {
     mode: "lines",
     name: '400 MHz',
     x: unpack(ground, 'time'),
-    y: unpack(ground, 'intensity_400'),
-    marker: {
-    //color: 'rgb(217,95,2)',
-    opacity: 0.9,
-    size: 6,
-  }
+    y: unpack(ground, 'intensity_400')
   }
 
   var trace2 = {
@@ -92,32 +87,18 @@ window.onload = function() {
     mode: "lines",
     name: '402 MHz',
     x: unpack(ground, 'time'),
-    y: unpack(ground, 'intensity_402'),
-    marker: {
-    //color: 'rgb(217,95,2)',
-    opacity: 0.9,
-    size: 6,
-  }
+    y: unpack(ground, 'intensity_402')
   }
 
-    var trace3 = {
+  var trace3 = {
     type: "scattergl",
     mode: "lines",
     name: '404 MHz',
     x: unpack(ground, 'time'),
-    y: unpack(ground, 'intensity_404'),
-    marker: {
-    //color: 'rgb(217,95,2)',
-    opacity: 0.9,
-    size: 6,
-  }
+    y: unpack(ground, 'intensity_404')
   }
 
-  var data = [
-    trace1,
-    trace2,
-    trace3,
-  ];
+  var data = [trace1, trace2, trace3];
       
   var layout = {
     hovermode: "closest",
