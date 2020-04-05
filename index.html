@@ -7,23 +7,11 @@
     <meta charset="utf-8">
     <title>Pulsar Timing Tutorial</title>
     <meta name="description" content="">
-    <meta name="author" content="Daniel Hey">
     <meta name="author" content="Tim White">
 
     <!-- CSS–––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="css/new.css">
     
-    <!-- Scripts–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script type="text/javascript" src="js/utils.js"></script>
-    <script
-			  src="https://code.jquery.com/jquery-3.3.1.min.js"
-			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-        <script
-			  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-			  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-			  crossorigin="anonymous"></script>
-	  <script type="text/javascript" src="js/plotly-latest.min.js"></script>
     
     <!-- Favicon  -->
     <link rel="icon" type="image/jpg" href="css/icon.jpg">
@@ -34,173 +22,19 @@
   <!-- Primary Page Layout–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
 
-  <div id="content"></div>
+  <div id="content">
+    <head>Astronomy OLE</head>
+
+
+    Pulsar data sets at individual frequencies<br>
+
+    0628-28
+    <a href="0628-28_400.html">400 MHz</a> <a href="0628-28_600.html">600 MHz</a> <a href="0628-28_800.html">800 MHz</a> <a href="0628-28_400.html">1200 MHz</a>     <a href="0628-28_1400.html">1400 MHz</a>
+
+  </div>
 
 </body>
 
-<div>
-  <ul class="ruler" id="mydiv" data-items="10"></ul>
-</div>
-
-
-<div>
-  <div class="slidecontainer">
-    <input type="range" min="1" max="15" value="1" class="slider" id="spacing" step=0.25>
-  </div>
-</div>
-
-<!-- Scripts! ––––––––––––––––––––––––––––––––––––––––––––––––––-->
-<script>
-
-//Called when the program first opens
-window.onload = function() {
-
-
-
-
-
-
-
-
-
-
-
-  
-	//Instantiate the chart and bind it to content html
-  var graphDiv = document.getElementById('content');	
-
-  Plotly.d3.csv("data/0628-28_lowf.csv", function(err, ground){
-    function unpack(ground, key) {
-      return ground.map(function(ground) { return ground[key]; });
-    }
-
-  var trace1 = {
-    type: "scattergl",
-    mode: "lines",
-    name: 'Ground-based',
-    x: unpack(ground, 'time'),
-    y: unpack(ground, 'intensity_400'),
-    marker: {
-    //color: 'rgb(217,95,2)',
-    opacity: 0.9,
-    size: 6,
-  }
-  }
-
-  var data = [
-    trace1,
-  ];
-      
-  var layout = {
-    hovermode: "closest",
-    yaxis: {title: 'Intensity'},
-    xaxis: {title: 'Time (seconds)'},
-    margin: {
-      t: 50, //top margin
-      l: 100, //left margin
-      r: 50, //right margin
-      b: 50 //bottom margin
-          },
-      legend: {
-      x: 0,
-      y: 1,
-      traceorder: 'normal',
-      font: {
-        family: 'sans-serif',
-        size: 30,
-        color: '#000'
-      },
-      bgcolor: '#E2E2E2',
-      bordercolor: '#FFFFFF',
-      borderwidth: 3
-    },
-          };
-
-	var config2 = {
-   modeBarButtonsToRemove: ['toImage', 'sendDataToCloud', 
-          'hoverCompareCartesian','toggleSpikelines',
-          'autoScale2d','select2d','lasso2d'],
-   displaylogo: false
-};
-
-  Plotly.newPlot(graphDiv, data, layout, config2);
-
-
-
-  $(function() {
-    // Build "dynamic" rulers by adding items
-    $(".ruler[data-items]").each(function() {
-        var ruler = $(this).empty(),
-            len = Number(ruler.attr("data-items")) || 0,
-            item = $(document.createElement("li")),
-            i;
-        for (i = 0; i < len; i++) {
-            ruler.append(item.clone().text(i + 1));
-        }
-    });
-    // Change the spacing programatically
-    function changeRulerSpacing(spacing) {
-      spacing = spacing.concat("em")
-        $(".ruler").
-          css("padding-right", spacing).
-          find("li").
-            css("padding-left", spacing);
-    }
-    $("#spacing").change(function() {
-        changeRulerSpacing($(this).val());
-    });
-  });
-
-  $( "#mydiv" ).resizable({ ghost: true });
-// Make the DIV element draggable:
-dragElement(document.getElementById("mydiv"));
-
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
-  }
-
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
-
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-  }
-
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
-
-});
-
-}
-
-</script>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
